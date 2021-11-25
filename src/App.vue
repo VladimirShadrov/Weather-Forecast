@@ -18,10 +18,17 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&family=PT+Serif:wght@400;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Kumbh Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
 }
 
 .container {
@@ -29,6 +36,7 @@ export default {
   max-width: 830px;
   margin: 0 auto;
   padding: 0 15px;
+  padding-top: 50px;
 }
 
 #app {
