@@ -1,20 +1,30 @@
 <template>
   <div class="main-header">
     <div class="main-header__temperature">
-      <div class="main-header__temperature-value">186</div>
+      <div class="main-header__temperature-value">
+        {{ WEATHER_DATA.temperature }}
+      </div>
       <div class="main-header__degrees-icon"></div>
       <div class="main-header__temperature-celsius">C</div>
     </div>
 
-    <div class="main-header__weather-value">Переменная облачность</div>
+    <div class="main-header__weather-value">
+      {{ WEATHER_DATA.weatherDescription }}
+    </div>
 
     <div class="main-header__weather-icon-container"></div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'MainPageContainerHeader',
+
+  computed: {
+    ...mapGetters(['WEATHER_DATA']),
+  },
 };
 </script>
 

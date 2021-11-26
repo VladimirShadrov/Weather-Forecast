@@ -4,17 +4,23 @@
       <div class="main-content__headline-temperature">
         По ощущениям
 
-        <span class="headline__temperature-value">897 &deg;</span>
+        <span class="headline__temperature-value"
+          >{{ WEATHER_DATA.temperatureFeelsLike }} &deg;</span
+        >
       </div>
 
       <div class="main-content__headline-min-max">
         <div class="main-content__headline-min">
           Мин.
-          <span class="main-content__headline-min-value">-89.9 &deg;</span>
+          <span class="main-content__headline-min-value"
+            >{{ WEATHER_DATA.temperatureMin }} &deg;</span
+          >
         </div>
         <div class="main-content__headline-max">
           Макс.
-          <span class="main-content__headline-max-value">+98.6 &deg;</span>
+          <span class="main-content__headline-max-value"
+            >{{ WEATHER_DATA.temperatureMax }} &deg;</span
+          >
         </div>
       </div>
     </div>
@@ -22,7 +28,10 @@
     <div class="main-content__time">
       <span class="main-content__time-hour">69</span>
       <span
-        class="main-content__time-separator main-content__time-separator-active"
+        class="main-content__time-separator"
+        :class="{
+          'main-content__time-separator-active': isTimerSeparatorVisible,
+        }"
         >:</span
       >
       <span class="main-content__time-minutes">96</span>
@@ -38,8 +47,38 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'MainPageContainerContent',
+
+  data() {
+    return {
+      timerInterval: '',
+      isTimerSeparatorVisible: false,
+    };
+  },
+
+  methods: {
+    switchTimerSeparator() {
+      this.timerInterval = setInterval(
+        () => (this.isTimerSeparatorVisible = !this.isTimerSeparatorVisible),
+        1000
+      );
+    },
+  },
+
+  computed: {
+    ...mapGetters(['WEATHER_DATA']),
+  },
+
+  mounted() {
+    this.switchTimerSeparator();
+  },
+
+  unmounted() {
+    clearInterval(this.timerInterval);
+  },
 };
 </script>
 

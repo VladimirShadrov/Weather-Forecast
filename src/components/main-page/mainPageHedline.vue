@@ -2,7 +2,7 @@
   <div class="headline">
     <div class="headline__city-container">
       <div class="headline__text">Погода в городе</div>
-      <h2 class="headline__sity-title">Астрахань</h2>
+      <h2 class="headline__sity-title">{{ WEATHER_DATA.sity }}</h2>
     </div>
 
     <div class="headline__search-block">
@@ -29,8 +29,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'MainPageHedline',
+
+  computed: {
+    ...mapGetters(['WEATHER_DATA']),
+  },
 };
 </script>
 
