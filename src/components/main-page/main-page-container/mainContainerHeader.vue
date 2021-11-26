@@ -45,6 +45,8 @@ export default {
   height: 8px;
   border-radius: 50%;
   border: 1px solid #ffffff;
+  margin-top: 4px;
+  margin-right: 3px;
 }
 
 .main-header__temperature-celsius {
@@ -65,7 +67,5 @@ export default {
   height: 100px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.5);
-
-  border: 1px solid #fff;
 }
 </style>
