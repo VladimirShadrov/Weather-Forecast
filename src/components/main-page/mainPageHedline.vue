@@ -7,6 +7,7 @@
 
     <div class="headline__search-block">
       <input type="text" class="headline__input" placeholder="Введите город" />
+      <span class="headline__input-border"></span>
       <button class="headline__search-button">
         <svg
           width="10"
@@ -51,7 +52,7 @@ export default {
 .headline__sity-title {
   font-size: 40px;
   line-height: 44px;
-  font-weight: 700;
+  // font-weight: 700;
 }
 
 .headline__search-block {
@@ -61,10 +62,21 @@ export default {
   border-radius: 10px;
 }
 
+.headline__input-border {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 45px;
+  height: 20px;
+  width: 1px;
+  background: #ffffff;
+  opacity: 0;
+}
+
 .headline__input {
   width: 100%;
   padding: 8px 12px;
-  padding-right: 40px;
+  padding-right: 50px;
   height: 40px;
   color: #ffffff;
   font-size: 16px;
@@ -72,6 +84,10 @@ export default {
   background: transparent;
   border: none;
   outline: none;
+
+  &:focus ~ .headline__input-border {
+    opacity: 1;
+  }
 }
 
 .headline__search-button {
