@@ -140,4 +140,37 @@ export default {
 .main-content__date-month {
   margin-right: 4px;
 }
+
+@media (max-width: 450px) {
+  .main-content__headline {
+    flex-wrap: wrap;
+  }
+
+  .main-content__headline-temperature {
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .main-content__headline-min-max {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .main-content__headline-max {
+    text-align: center;
+  }
+
+  .main-content__date {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .main-content__date-day {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+}
 </style>

@@ -68,4 +68,25 @@ export default {
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.5);
 }
+
+@media (max-width: 450px) {
+  .main-header {
+    flex-wrap: wrap;
+  }
+
+  .main-header__temperature {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .main-header__weather-value {
+    width: 100%;
+    text-align: left;
+  }
+
+  .main-header__weather-icon-container {
+    top: calc(-25% - 40px);
+    left: calc(75% - 50px);
+  }
+}
 </style>

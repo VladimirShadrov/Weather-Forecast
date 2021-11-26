@@ -35,8 +35,7 @@ export default {
   width: 100%;
   max-width: 830px;
   margin: 0 auto;
-  padding: 0 8px;
-  padding-top: 50px;
+  padding: 50px 8px;
 }
 
 #app {

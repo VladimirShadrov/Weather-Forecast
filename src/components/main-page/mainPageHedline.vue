@@ -2,7 +2,7 @@
   <div class="headline">
     <div class="headline__city-container">
       <div class="headline__text">Погода в городе</div>
-      <h2 class="headline__sity-title">Москва</h2>
+      <h2 class="headline__sity-title">Астрахань</h2>
     </div>
 
     <div class="headline__search-block">
@@ -42,7 +42,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 80px;
 }
 
 .headline__text {
@@ -52,11 +52,11 @@ export default {
 .headline__sity-title {
   font-size: 40px;
   line-height: 44px;
-  // font-weight: 700;
+  max-width: 400px;
 }
 
 .headline__search-block {
-  width: 40%;
+  width: 300px;
   position: relative;
   border: 1px solid #ffffff;
   border-radius: 10px;
@@ -107,6 +107,28 @@ export default {
   & > svg {
     transform: scale(1.5);
     pointer-events: none;
+  }
+}
+
+@media (max-width: 750px) {
+  .headline {
+    flex-direction: column;
+  }
+
+  .headline__city-container {
+    margin-bottom: 15px;
+  }
+
+  .headline__city-container,
+  .headline__sity-title,
+  .headline__search-block {
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  .headline {
+    margin-bottom: 60px;
   }
 }
 </style>

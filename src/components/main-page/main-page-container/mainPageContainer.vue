@@ -26,5 +26,6 @@ export default {
   background: rgba(0, 0, 0, 0.5);
   padding: 15px;
   border-radius: 15px;
+  margin-bottom: 40px;
 }
 </style>
