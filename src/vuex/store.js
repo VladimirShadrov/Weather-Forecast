@@ -26,7 +26,7 @@ const store = new Vuex.Store({
   getters: {
     WEATHER_DATA(state) {
       return {
-        sity: state.city,
+        city: state.city,
         temperature: state.temperature,
         weatherDescription: state.weatherDescription,
         weatherIcon: state.weatherIcon,
@@ -57,6 +57,9 @@ const store = new Vuex.Store({
   mutations: {
     SET_WEATHER(state, data) {
       const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+      const windDirection = `transform: rotate(${Math.round(
+        data.wind.deg
+      )}deg)`;
 
       state.city = data.name;
       state.temperature = Math.round(data.main.temp);
@@ -67,7 +70,7 @@ const store = new Vuex.Store({
       state.temperatureMax = Math.round(data.main.temp_max);
       state.humidity = Math.round(data.main.humidity);
       state.cloudy = data.clouds.all;
-      state.windDirection = Math.round(data.wind.deg);
+      state.windDirection = windDirection;
       state.windSpeed = Math.round(data.wind.speed);
       state.pressure = Math.round(data.main.pressure * 0.736);
       state.visibility = Math.round(data.visibility / 1000);
@@ -116,8 +119,15 @@ const store = new Vuex.Store({
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=c18945d191bd6987791292cb17a65e5c&lang=ru&units=metric`
       )
-        .then((response) => response.json())
-        .then((weatherData) => context.commit('SET_WEATHER', weatherData));
+        .then((response) =>
+          response.ok ? response.json() : Promise.reject(response)
+        )
+        .then((weatherData) => {
+          context.commit('SET_WEATHER', weatherData);
+        })
+        .catch((e) => {
+          console.log('Произошла ошибка: ', e.status);
+        });
     },
   },
 });

@@ -26,8 +26,7 @@ export default {
   },
 
   mounted() {
-    this.GET_WEATHER('москва');
-    setTimeout(() => console.log(this.WEATHER_DATA), 2000);
+    this.GET_WEATHER(this.WEATHER_DATA.city);
   },
 };
 </script>
@@ -54,7 +53,7 @@ export default {
 }
 
 #app {
-  background: url('./assets/images/sunny.jpg') center / cover no-repeat;
+  background: url('./assets/images/cloudy.jpg') center / cover no-repeat;
   min-height: 100vh;
 }
 </style>

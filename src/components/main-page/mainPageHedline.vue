@@ -2,13 +2,20 @@
   <div class="headline">
     <div class="headline__city-container">
       <div class="headline__text">Погода в городе</div>
-      <h2 class="headline__sity-title">{{ WEATHER_DATA.sity }}</h2>
+      <h2 class="headline__sity-title">{{ WEATHER_DATA.city }}</h2>
     </div>
 
     <div class="headline__search-block">
-      <input type="text" class="headline__input" placeholder="Введите город" />
+      <input
+        type="text"
+        class="headline__input"
+        placeholder="Введите город"
+        v-model="selectedCity"
+        @keydown.enter="selectCity(selectedCity)"
+        ref="cityInput"
+      />
       <span class="headline__input-border"></span>
-      <button class="headline__search-button">
+      <button class="headline__search-button" @click="selectCity(selectedCity)">
         <svg
           width="10"
           height="10"
@@ -29,10 +36,30 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'MainPageHedline',
+
+  data() {
+    return {
+      selectedCity: '',
+    };
+  },
+
+  methods: {
+    ...mapActions(['GET_WEATHER']),
+    selectCity(city) {
+      if (this.selectedCity === '') {
+        console.log('Выбранный город отсутствует');
+        return;
+      }
+
+      this.GET_WEATHER(city);
+      this.selectedCity = '';
+      this.$refs.cityInput.blur();
+    },
+  },
 
   computed: {
     ...mapGetters(['WEATHER_DATA']),
@@ -93,6 +120,10 @@ export default {
 
   &:focus ~ .headline__input-border {
     opacity: 1;
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.6);
   }
 }
 

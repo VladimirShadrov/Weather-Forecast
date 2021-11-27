@@ -31,7 +31,10 @@
             <div class="main-footer__wind-east">E</div>
             <div class="main-footer__wind-south">S</div>
             <div class="main-footer__wind-west">W</div>
-            <div class="main-footer__wind-cursor"></div>
+            <div
+              class="main-footer__wind-cursor"
+              :style="WEATHER_DATA.windDirection"
+            ></div>
           </div>
         </div>
       </div>
@@ -178,7 +181,7 @@ export default {
     top: -13px;
     left: calc(50% - 9px);
     border: 8px solid transparent;
-    border-top: 14px solid blue;
+    border-top: 14px solid red;
   }
 }
 

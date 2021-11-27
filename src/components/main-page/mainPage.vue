@@ -37,7 +37,8 @@ export default {
 .main-button {
   width: 270px;
   background: rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: none;
+  outline: none;
   display: block;
   margin: 0 auto;
   height: 40px;
