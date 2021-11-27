@@ -26,7 +26,7 @@
     </div>
 
     <div class="main-content__time">
-      <span class="main-content__time-hour">69</span>
+      <span class="main-content__time-hour">{{ CURRENT_TIME.hours }}</span>
       <span
         class="main-content__time-separator"
         :class="{
@@ -34,20 +34,17 @@
         }"
         >:</span
       >
-      <span class="main-content__time-minutes">96</span>
+      <span class="main-content__time-minutes">{{ CURRENT_TIME.minutes }}</span>
     </div>
 
     <div class="main-content__date">
-      <span class="main-content__date-day">Воскресенье,</span>
-      <span class="main-content__date-date">96</span>
-      <span class="main-content__date-month">ноябряяяяя</span>
-      <span class="main-content__date-year">2021 г.</span>
+      {{ CURRENT_DATE }}
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
   name: 'MainPageContainerContent',
@@ -60,20 +57,25 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['SET_CURRENT_DATE', 'SET_CURRENT_TIME']),
+
     switchTimerSeparator() {
-      this.timerInterval = setInterval(
-        () => (this.isTimerSeparatorVisible = !this.isTimerSeparatorVisible),
-        1000
-      );
+      this.timerInterval = setInterval(() => {
+        this.isTimerSeparatorVisible = !this.isTimerSeparatorVisible;
+        this.SET_CURRENT_TIME();
+      }, 1000);
     },
   },
 
   computed: {
-    ...mapGetters(['WEATHER_DATA']),
+    ...mapGetters(['WEATHER_DATA', 'CURRENT_DATE', 'CURRENT_TIME']),
   },
 
   mounted() {
     this.switchTimerSeparator();
+
+    this.SET_CURRENT_DATE();
+    this.SET_CURRENT_TIME();
   },
 
   unmounted() {
@@ -154,6 +156,7 @@ export default {
 
 .main-content__date {
   text-align: center;
+  line-height: 24px;
 }
 
 .main-content__time-separator {
@@ -162,22 +165,6 @@ export default {
 
 .main-content__time-separator-active {
   opacity: 1;
-}
-
-.main-content__date-day,
-.main-content__date-date,
-.main-content__date-month,
-.main-content__date-year {
-  display: inline-block;
-}
-
-.main-content__date-day {
-  margin-right: 5px;
-}
-
-.main-content__date-date,
-.main-content__date-month {
-  margin-right: 4px;
 }
 
 @media (max-width: 450px) {
@@ -198,18 +185,6 @@ export default {
 
   .main-content__headline-max {
     text-align: center;
-  }
-
-  .main-content__date {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .main-content__date-day {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 8px;
   }
 }
 </style>

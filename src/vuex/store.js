@@ -17,6 +17,9 @@ const store = new Vuex.Store({
     windSpeed: 0,
     pressure: 0,
     visibility: 0,
+    currentDate: '',
+    currentHours: '',
+    currentMinutes: '',
   },
 
   getters: {
@@ -36,6 +39,17 @@ const store = new Vuex.Store({
         visibility: state.visibility,
       };
     },
+
+    CURRENT_DATE(state) {
+      return state.currentDate;
+    },
+
+    CURRENT_TIME(state) {
+      return {
+        hours: state.currentHours,
+        minutes: state.currentMinutes,
+      };
+    },
   },
 
   mutations: {
@@ -52,6 +66,43 @@ const store = new Vuex.Store({
       state.windSpeed = Math.floor(data.wind.speed);
       state.pressure = Math.floor(data.main.pressure * 0.736);
       state.visibility = Math.floor(data.visibility / 1000);
+    },
+
+    SET_CURRENT_DATE(state) {
+      const date = new Date().toLocaleString('ru', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
+
+      const currentDate = date[0].toUpperCase() + date.slice(1, date.length);
+      state.currentDate = currentDate;
+    },
+
+    SET_CURRENT_TIME(state) {
+      const currentMinutes = new Date().toLocaleDateString('ru', {
+        minute: 'numeric',
+      });
+      const currentHours = new Date().toLocaleDateString('ru', {
+        hour: 'numeric',
+      });
+
+      let minutes = currentMinutes.slice(
+        currentMinutes.length - 2,
+        currentMinutes.length
+      );
+      let hours = currentHours.slice(
+        currentHours.length - 2,
+        currentHours.length
+      );
+
+      minutes < 10 && minutes >= 0
+        ? (state.currentMinutes = 0 + minutes)
+        : (state.currentMinutes = minutes);
+      hours < 10 && hours >= 0
+        ? (state.currentHours = 0 + hours)
+        : (state.currentHours = hours);
     },
   },
 
