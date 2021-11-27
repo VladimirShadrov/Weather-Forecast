@@ -8,11 +8,26 @@
 
 <script>
 import MainPage from './components/main-page/mainPage.vue';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'App',
+
   components: {
     MainPage,
+  },
+
+  methods: {
+    ...mapActions(['GET_WEATHER']),
+  },
+
+  computed: {
+    ...mapGetters(['WEATHER_DATA']),
+  },
+
+  mounted() {
+    this.GET_WEATHER('санкт-петербург');
+    setTimeout(() => console.log(this.WEATHER_DATA), 2000);
   },
 };
 </script>
@@ -39,7 +54,7 @@ export default {
 }
 
 #app {
-  background: url('./assets/images/cloudy.jpg') center / cover no-repeat;
+  background: url('./assets/images/rain.jpg') center / cover no-repeat;
   min-height: 100vh;
 }
 </style>

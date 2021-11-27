@@ -4,22 +4,28 @@
       <div class="main-footer__item">
         <div class="main-footer__item-icon main-footer__item-icon-drops"></div>
         <div class="main-footer__item-parameter">Влажность</div>
-        <div class="main-footer__item-parameter-value">88 %</div>
+        <div class="main-footer__item-parameter-value">
+          {{ WEATHER_DATA.humidity }} %
+        </div>
       </div>
 
       <div class="main-footer__item">
         <div
           class="main-footer__item-icon main-footer__item-icon-umbrella"
         ></div>
-        <div class="main-footer__item-parameter">Осадки</div>
-        <div class="main-footer__item-parameter-value">86 мм</div>
+        <div class="main-footer__item-parameter">Облачность</div>
+        <div class="main-footer__item-parameter-value">
+          {{ WEATHER_DATA.cloudy }} %
+        </div>
       </div>
 
       <div class="main-footer__wind-wrapper">
         <div class="main-footer__wind-title">Ветер</div>
         <div class="main-footer__wind">
           <div class="main-footer__wind-container">
-            <div class="main-footer__wind-speed">69</div>
+            <div class="main-footer__wind-speed">
+              {{ WEATHER_DATA.windSpeed }}
+            </div>
             <div class="main-footer__wind-speed-text">км/ч</div>
             <div class="main-footer__wind-north">N</div>
             <div class="main-footer__wind-east">E</div>
@@ -33,21 +39,31 @@
       <div class="main-footer__item">
         <div class="main-footer__item-icon"></div>
         <div class="main-footer__item-parameter">Давление</div>
-        <div class="main-footer__item-parameter-value">869 мм</div>
+        <div class="main-footer__item-parameter-value">
+          {{ WEATHER_DATA.pressure }} мм
+        </div>
       </div>
 
       <div class="main-footer__item">
         <div class="main-footer__item-icon main-footer__item-icon-eye"></div>
         <div class="main-footer__item-parameter">Видимость</div>
-        <div class="main-footer__item-parameter-value">968 км</div>
+        <div class="main-footer__item-parameter-value">
+          {{ WEATHER_DATA.visibility }} км
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'MainPageContainerFooter',
+
+  computed: {
+    ...mapGetters(['WEATHER_DATA']),
+  },
 };
 </script>
 
