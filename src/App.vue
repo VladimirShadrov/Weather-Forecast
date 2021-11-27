@@ -26,7 +26,7 @@ export default {
   },
 
   mounted() {
-    this.GET_WEATHER('чернушка');
+    this.GET_WEATHER('санкт-петербург');
     setTimeout(() => console.log(this.WEATHER_DATA), 2000);
   },
 };

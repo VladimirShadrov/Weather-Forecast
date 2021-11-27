@@ -58,7 +58,7 @@ const store = new Vuex.Store({
   actions: {
     GET_WEATHER(context, city) {
       fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=5c680e5d8c8f29befb9f1c239dfae90b&lang=ru&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=c18945d191bd6987791292cb17a65e5c&lang=ru&units=metric`
       )
         .then((response) => response.json())
         .then((weatherData) => context.commit('SET_WEATHER', weatherData));
