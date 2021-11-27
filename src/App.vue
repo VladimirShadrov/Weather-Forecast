@@ -54,7 +54,7 @@ export default {
 }
 
 #app {
-  background: url('./assets/images/rain.jpg') center / cover no-repeat;
+  background: url('./assets/images/sunny.jpg') center / cover no-repeat;
   min-height: 100vh;
 }
 </style>

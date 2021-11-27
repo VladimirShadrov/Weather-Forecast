@@ -26,7 +26,7 @@
             <div class="main-footer__wind-speed">
               {{ WEATHER_DATA.windSpeed }}
             </div>
-            <div class="main-footer__wind-speed-text">км/ч</div>
+            <div class="main-footer__wind-speed-text">м/с</div>
             <div class="main-footer__wind-north">N</div>
             <div class="main-footer__wind-east">E</div>
             <div class="main-footer__wind-south">S</div>

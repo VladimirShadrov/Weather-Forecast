@@ -102,7 +102,7 @@ export default {
 
 .main-content__headline-min-max {
   display: flex;
-  width: 250px;
+  width: 200px;
 }
 
 .main-content__headline-min,
@@ -112,7 +112,7 @@ export default {
 
 .main-content__headline-min {
   border-right: 1px solid #ffffff;
-  text-align: center;
+  text-align: left;
 }
 
 .main-content__headline-max {
@@ -183,7 +183,8 @@ export default {
     width: 100%;
   }
 
-  .main-content__headline-max {
+  .main-content__headline-max,
+  .main-content__headline-min {
     text-align: center;
   }
 }

@@ -12,7 +12,9 @@
       {{ WEATHER_DATA.weatherDescription }}
     </div>
 
-    <div class="main-header__weather-icon-container"></div>
+    <div class="main-header__weather-icon-container">
+      <img :src="WEATHER_DATA.weatherIcon" alt="image" title="weather-image" />
+    </div>
   </div>
 </template>
 
@@ -71,12 +73,25 @@ export default {
 
 .main-header__weather-icon-container {
   position: absolute;
-  top: calc(-50% - 40px);
+  top: calc(-50% - 38px);
   left: calc(50% - 50px);
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+
+  overflow: hidden;
+
+  & > img {
+    display: block;
+    transform: scale(1.2);
+  }
 }
 
 @media (max-width: 450px) {
@@ -95,7 +110,7 @@ export default {
   }
 
   .main-header__weather-icon-container {
-    top: calc(-25% - 40px);
+    top: calc(-25% - 44px);
     left: calc(75% - 50px);
   }
 }

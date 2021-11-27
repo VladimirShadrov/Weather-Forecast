@@ -8,6 +8,7 @@ const store = new Vuex.Store({
     city: 'Москва',
     temperature: 0,
     weatherDescription: 'Пасмурно',
+    weatherIcon: '',
     temperatureFeelsLike: 0,
     temperatureMin: 0,
     temperatureMax: 0,
@@ -28,6 +29,7 @@ const store = new Vuex.Store({
         sity: state.city,
         temperature: state.temperature,
         weatherDescription: state.weatherDescription,
+        weatherIcon: state.weatherIcon,
         temperatureFeelsLike: state.temperatureFeelsLike,
         temperatureMin: state.temperatureMin,
         temperatureMax: state.temperatureMax,
@@ -54,18 +56,21 @@ const store = new Vuex.Store({
 
   mutations: {
     SET_WEATHER(state, data) {
+      const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
       state.city = data.name;
-      state.temperature = Math.floor(data.main.temp);
+      state.temperature = Math.round(data.main.temp);
       state.weatherDescription = data.weather[0].description;
-      state.temperatureFeelsLike = Math.floor(data.main.feels_like);
-      state.temperatureMin = Math.floor(data.main.temp_min);
-      state.temperatureMax = Math.floor(data.main.temp_max);
-      state.humidity = Math.floor(data.main.humidity);
+      state.weatherIcon = iconUrl;
+      state.temperatureFeelsLike = Math.round(data.main.feels_like);
+      state.temperatureMin = Math.round(data.main.temp_min);
+      state.temperatureMax = Math.round(data.main.temp_max);
+      state.humidity = Math.round(data.main.humidity);
       state.cloudy = data.clouds.all;
-      state.windDirection = Math.floor(data.wind.deg);
-      state.windSpeed = Math.floor(data.wind.speed);
-      state.pressure = Math.floor(data.main.pressure * 0.736);
-      state.visibility = Math.floor(data.visibility / 1000);
+      state.windDirection = Math.round(data.wind.deg);
+      state.windSpeed = Math.round(data.wind.speed);
+      state.pressure = Math.round(data.main.pressure * 0.736);
+      state.visibility = Math.round(data.visibility / 1000);
     },
 
     SET_CURRENT_DATE(state) {
@@ -98,10 +103,10 @@ const store = new Vuex.Store({
       );
 
       minutes < 10 && minutes >= 0
-        ? (state.currentMinutes = 0 + minutes)
+        ? (state.currentMinutes = 0 + minutes.trim())
         : (state.currentMinutes = minutes);
       hours < 10 && hours >= 0
-        ? (state.currentHours = 0 + hours)
+        ? (state.currentHours = 0 + hours.trim())
         : (state.currentHours = hours);
     },
   },
