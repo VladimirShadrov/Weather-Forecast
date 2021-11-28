@@ -21,6 +21,9 @@ const store = new Vuex.Store({
     currentDate: '',
     currentHours: '',
     currentMinutes: '',
+    isModalExist: false,
+    isModalErrorVisible: false,
+    cityError: '',
   },
 
   getters: {
@@ -39,6 +42,7 @@ const store = new Vuex.Store({
         windSpeed: state.windSpeed,
         pressure: state.pressure,
         visibility: state.visibility,
+        sityError: state.cityError,
       };
     },
 
@@ -50,6 +54,13 @@ const store = new Vuex.Store({
       return {
         hours: state.currentHours,
         minutes: state.currentMinutes,
+      };
+    },
+
+    MODAL_ERROR_DATA(state) {
+      return {
+        modalVisible: state.isModalErrorVisible,
+        modalExist: state.isModalExist,
       };
     },
   },
@@ -100,7 +111,7 @@ const store = new Vuex.Store({
         currentMinutes.length - 2,
         currentMinutes.length
       );
-      let hours = currentHours.slice(
+      state.currentHours = currentHours.slice(
         currentHours.length - 2,
         currentHours.length
       );
@@ -108,9 +119,25 @@ const store = new Vuex.Store({
       minutes < 10 && minutes >= 0
         ? (state.currentMinutes = 0 + minutes.trim())
         : (state.currentMinutes = minutes);
-      hours < 10 && hours >= 0
-        ? (state.currentHours = 0 + hours.trim())
-        : (state.currentHours = hours);
+    },
+
+    SHOW_MODAL_ERROR(state) {
+      if (!state.isModalExist) {
+        state.isModalExist = !state.isModalExist;
+
+        setTimeout(
+          () => (state.isModalErrorVisible = !state.isModalErrorVisible),
+          10
+        );
+      } else {
+        state.isModalErrorVisible = !state.isModalErrorVisible;
+
+        setTimeout(() => (state.isModalExist = !state.isModalExist), 300);
+      }
+    },
+
+    SET_ERROR_SITY(state, cityName) {
+      state.cityError = cityName;
     },
   },
 
@@ -125,8 +152,9 @@ const store = new Vuex.Store({
         .then((weatherData) => {
           context.commit('SET_WEATHER', weatherData);
         })
-        .catch((e) => {
-          console.log('Произошла ошибка: ', e.status);
+        .catch(() => {
+          context.commit('SHOW_MODAL_ERROR');
+          context.commit('SET_ERROR_SITY', city);
         });
     },
   },

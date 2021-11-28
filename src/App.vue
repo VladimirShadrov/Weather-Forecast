@@ -3,11 +3,13 @@
     <div class="container">
       <MainPage />
     </div>
+    <ModalError v-if="MODAL_ERROR_DATA.modalExist" />
   </div>
 </template>
 
 <script>
 import MainPage from './components/main-page/mainPage.vue';
+import ModalError from './components/modalError.vue';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
@@ -15,6 +17,7 @@ export default {
 
   components: {
     MainPage,
+    ModalError,
   },
 
   methods: {
@@ -22,7 +25,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['WEATHER_DATA']),
+    ...mapGetters(['WEATHER_DATA', 'MODAL_ERROR_DATA']),
   },
 
   mounted() {
@@ -53,7 +56,7 @@ export default {
 }
 
 #app {
-  background: url('./assets/images/cloudy.jpg') center / cover no-repeat;
+  background: url('./assets/images/winter.jpg') center / cover no-repeat;
   min-height: 100vh;
 }
 </style>

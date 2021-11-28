@@ -63,6 +63,7 @@ export default {
       this.timerInterval = setInterval(() => {
         this.isTimerSeparatorVisible = !this.isTimerSeparatorVisible;
         this.SET_CURRENT_TIME();
+        this.SET_CURRENT_DATE();
       }, 1000);
     },
   },
