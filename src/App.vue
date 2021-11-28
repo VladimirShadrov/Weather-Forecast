@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{ 'data-loading': DATA_LOADING }">
     <div class="container">
       <MainPage />
     </div>
@@ -25,7 +25,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['WEATHER_DATA', 'MODAL_ERROR_DATA']),
+    ...mapGetters(['WEATHER_DATA', 'MODAL_ERROR_DATA', 'DATA_LOADING']),
   },
 
   mounted() {
@@ -34,7 +34,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&family=PT+Serif:wght@400;700&display=swap');
 
 * {
@@ -58,5 +58,36 @@ export default {
 #app {
   background: url('./assets/images/winter.jpg') center / cover no-repeat;
   min-height: 100vh;
+}
+
+.data-loading {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 32px;
+    height: 32px;
+    background: url('./assets/images/preloader.svg');
+    z-index: 2;
+  }
 }
 </style>

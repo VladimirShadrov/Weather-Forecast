@@ -24,6 +24,7 @@ const store = new Vuex.Store({
     isModalExist: false,
     isModalErrorVisible: false,
     cityError: '',
+    isDataLoading: false,
   },
 
   getters: {
@@ -62,6 +63,10 @@ const store = new Vuex.Store({
         modalVisible: state.isModalErrorVisible,
         modalExist: state.isModalExist,
       };
+    },
+
+    DATA_LOADING(state) {
+      return state.isDataLoading;
     },
   },
 
@@ -139,6 +144,10 @@ const store = new Vuex.Store({
     SET_ERROR_SITY(state, cityName) {
       state.cityError = cityName;
     },
+
+    SHOW_LOADER(state) {
+      state.isDataLoading = !state.isDataLoading;
+    },
   },
 
   actions: {
@@ -150,11 +159,17 @@ const store = new Vuex.Store({
           response.ok ? response.json() : Promise.reject(response)
         )
         .then((weatherData) => {
-          context.commit('SET_WEATHER', weatherData);
+          setTimeout(() => context.commit('SET_WEATHER', weatherData), 300);
+
+          if (this.state.isDataLoading) {
+            this.state;
+            setTimeout(() => context.commit('SHOW_LOADER'), 300);
+          }
         })
         .catch(() => {
           context.commit('SHOW_MODAL_ERROR');
           context.commit('SET_ERROR_SITY', city);
+          context.commit('SHOW_LOADER');
         });
     },
   },

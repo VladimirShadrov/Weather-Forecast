@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapMutations } from 'vuex';
 
 export default {
   name: 'MainPageHedline',
@@ -49,13 +49,14 @@ export default {
 
   methods: {
     ...mapActions(['GET_WEATHER']),
+    ...mapMutations(['SHOW_LOADER']),
     selectCity(city) {
       if (this.selectedCity === '') {
-        console.log('Выбранный город отсутствует');
         return;
       }
 
       this.GET_WEATHER(city);
+      this.SHOW_LOADER();
       this.selectedCity = '';
       this.$refs.cityInput.blur();
     },
