@@ -63,4 +63,16 @@ export default {
     color: rgba(255, 255, 255, 0.7);
   }
 }
+
+@media (max-width: 450px) {
+  .five-days__headline {
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .five-days__bread-crumbs {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
 </style>

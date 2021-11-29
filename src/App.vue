@@ -39,7 +39,7 @@ export default {
 
   mounted() {
     this.GET_WEATHER(this.WEATHER_DATA.city);
-    this.GET_WEATHER_FOR_FIVE_DAYS();
+    this.GET_WEATHER_FOR_FIVE_DAYS(this.WEATHER_DATA.city);
   },
 };
 </script>

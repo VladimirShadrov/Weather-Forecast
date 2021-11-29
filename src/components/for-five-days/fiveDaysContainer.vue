@@ -28,4 +28,10 @@ export default {
   background: rgba(0, 0, 0, 0.5);
   border-radius: 15px;
 }
+
+@media (max-width: 450px) {
+  .five-days__container {
+    padding: 20px 10px;
+  }
+}
 </style>

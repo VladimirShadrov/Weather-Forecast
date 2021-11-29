@@ -34,8 +34,19 @@ export default {
 
 .five-days__list {
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
   flex-wrap: wrap;
   margin: -10px;
+}
+
+@media (max-width: 390px) {
+  .five-days__list {
+    margin: -5px;
+  }
+
+  .five-days__common-container {
+    padding: 10px 0;
+  }
 }
 </style>

@@ -191,9 +191,9 @@ const store = new Vuex.Store({
         });
     },
 
-    GET_WEATHER_FOR_FIVE_DAYS(context) {
+    GET_WEATHER_FOR_FIVE_DAYS(context, city) {
       fetch(
-        'https://api.openweathermap.org/data/2.5/forecast?q=Москва&appid=c18945d191bd6987791292cb17a65e5c&lang=ru&units=metric'
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=c18945d191bd6987791292cb17a65e5c&lang=ru&units=metric`
       )
         .then((res) => res.json())
         .then((data) => {
@@ -222,7 +222,6 @@ const store = new Vuex.Store({
               pressure: Math.round(item.main.pressure * 0.736),
             };
           });
-          console.log(weatherForFiveDays);
 
           context.commit('SET_WEATHER_FOR_FIVE_DAYS', weatherForFiveDays);
         });

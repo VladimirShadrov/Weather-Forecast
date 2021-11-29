@@ -71,4 +71,23 @@ export default {
 .five-days__item-humidity {
   margin-top: auto;
 }
+
+@media (max-width: 670px) {
+  .five-days__list-item {
+    width: calc(33.33% - 20px);
+  }
+}
+
+@media (max-width: 550px) {
+  .five-days__list-item {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 390px) {
+  .five-days__list-item {
+    width: 100%;
+    margin: 5px;
+  }
+}
 </style>

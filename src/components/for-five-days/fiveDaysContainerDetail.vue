@@ -2,16 +2,33 @@
   <div class="five-days__detail-container">
     <div class="five-days__detail-left-bar">
       <div class="five-days__detail-date">
-        {{ WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].date }}
+        {{
+          WEATHER_FOR_FIVE_DAYS.length
+            ? WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].date
+            : '00.00.0000г.'
+        }}
       </div>
       <div class="five-days__detail-temperature">
-        {{ WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].temperature }}&deg;C
+        {{
+          WEATHER_FOR_FIVE_DAYS.length
+            ? WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].temperature
+            : 0
+        }}&deg;C
       </div>
       <div class="five-days__detail-weather">
-        {{ WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].weather }}
+        {{
+          WEATHER_FOR_FIVE_DAYS.length
+            ? WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].weather
+            : 0
+        }}
       </div>
       <div class="five-days__detail-feels-like">
-        Ощущается как: {{ WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].fellsLike }}&deg;
+        Ощущается как:
+        {{
+          WEATHER_FOR_FIVE_DAYS.length
+            ? WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].fellsLike
+            : 0
+        }}&deg;
       </div>
     </div>
 
@@ -20,28 +37,47 @@
         <div class="five-days__detail-item">
           <div class="five-days__detail-item-text">Ветер</div>
           <div class="five-days__detail-item-value">
-            {{ WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].wind }} м/с
+            {{
+              WEATHER_FOR_FIVE_DAYS.length
+                ? WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].wind
+                : 0
+            }}
+            м/с
           </div>
         </div>
 
         <div class="five-days__detail-item">
           <div class="five-days__detail-item-text">Влажность</div>
           <div class="five-days__detail-item-value">
-            {{ WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].humidity }}%
+            {{
+              WEATHER_FOR_FIVE_DAYS.length
+                ? WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].humidity
+                : 0
+            }}%
           </div>
         </div>
 
         <div class="five-days__detail-item">
           <div class="five-days__detail-item-text">Видимость</div>
           <div class="five-days__detail-item-value">
-            {{ WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].visibility }} км
+            {{
+              WEATHER_FOR_FIVE_DAYS.length
+                ? WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].visibility
+                : 0
+            }}
+            км
           </div>
         </div>
 
         <div class="five-days__detail-item">
           <div class="five-days__detail-item-text">Давление</div>
           <div class="five-days__detail-item-value">
-            {{ WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].pressure }} мм
+            {{
+              WEATHER_FOR_FIVE_DAYS.length
+                ? WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].pressure
+                : 0
+            }}
+            мм
           </div>
         </div>
       </div>
@@ -64,6 +100,7 @@ export default {
 <style lang="scss">
 .five-days__detail-container {
   display: flex;
+  flex-wrap: wrap;
   padding-top: 20px;
 }
 
@@ -120,5 +157,19 @@ export default {
 
 .five-days__detail-item-value {
   font-weight: 700;
+}
+
+@media (max-width: 550px) {
+  .five-days__detail-left-bar,
+  .five-days__detail-right-bar {
+    width: 100%;
+  }
+
+  .five-days__detail-left-bar {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>
