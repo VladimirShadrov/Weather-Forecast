@@ -172,6 +172,41 @@ const store = new Vuex.Store({
           context.commit('SHOW_LOADER');
         });
     },
+
+    GET_WEATHER_FOR_FIVE_DAYS() {
+      fetch(
+        'https://api.openweathermap.org/data/2.5/forecast?q=Москва&appid=c18945d191bd6987791292cb17a65e5c&lang=ru&units=metric'
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          const weather = [];
+
+          for (let i = 0; i <= data.list.length; i += 8) {
+            if (data.list[i]) weather.push(data.list[i]);
+          }
+
+          return weather;
+        })
+        .then((data) => {
+          const weatherForFiveDays = data.map((item) => {
+            return {
+              date: `${item.dt_txt.slice(8, 10)}.${item.dt_txt.slice(
+                5,
+                7
+              )}.${item.dt_txt.slice(0, 4)}г.`,
+              temperature: Math.round(item.main.temp),
+              weather: item.weather[0].description,
+              fellsLike: Math.round(item.main.feels_like),
+              wind: Math.round(item.wind.speed),
+              visibility: Math.round(item.visibility / 1000),
+              humidity: item.main.humidity,
+              pressure: Math.round(item.main.pressure * 0.736),
+            };
+          });
+
+          console.log(weatherForFiveDays);
+        });
+    },
   },
 });
 

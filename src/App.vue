@@ -1,7 +1,8 @@
 <template>
   <div id="app" :class="{ 'data-loading': DATA_LOADING }">
     <div class="container">
-      <MainPage />
+      <MainPage v-if="isVisible" />
+      <FiveDaysPage />
     </div>
     <ModalError v-if="MODAL_ERROR_DATA.modalExist" />
   </div>
@@ -10,18 +11,26 @@
 <script>
 import MainPage from './components/main-page/mainPage.vue';
 import ModalError from './components/modalError.vue';
+import FiveDaysPage from './components/for-five-days/forecastFiveDays.vue';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'App',
 
+  data() {
+    return {
+      isVisible: false,
+    };
+  },
+
   components: {
     MainPage,
     ModalError,
+    FiveDaysPage,
   },
 
   methods: {
-    ...mapActions(['GET_WEATHER']),
+    ...mapActions(['GET_WEATHER', 'GET_WEATHER_FOR_FIVE_DAYS']),
   },
 
   computed: {
@@ -30,6 +39,7 @@ export default {
 
   mounted() {
     this.GET_WEATHER(this.WEATHER_DATA.city);
+    this.GET_WEATHER_FOR_FIVE_DAYS();
   },
 };
 </script>
