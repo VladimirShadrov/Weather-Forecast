@@ -1,32 +1,48 @@
 <template>
   <div class="five-days__detail-container">
     <div class="five-days__detail-left-bar">
-      <div class="five-days__detail-date">30.11.2021г.</div>
-      <div class="five-days__detail-temperature">-15&deg;C</div>
-      <div class="five-days__detail-weather">Пасмурно</div>
-      <div class="five-days__detail-feels-like">Ощущается как: -25&deg;</div>
+      <div class="five-days__detail-date">
+        {{ WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].date }}
+      </div>
+      <div class="five-days__detail-temperature">
+        {{ WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].temperature }}&deg;C
+      </div>
+      <div class="five-days__detail-weather">
+        {{ WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].weather }}
+      </div>
+      <div class="five-days__detail-feels-like">
+        Ощущается как: {{ WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].fellsLike }}&deg;
+      </div>
     </div>
 
     <div class="five-days__detail-right-bar">
       <div class="five-days__detail-wrapper">
         <div class="five-days__detail-item">
           <div class="five-days__detail-item-text">Ветер</div>
-          <div class="five-days__detail-item-value">5 м/с</div>
+          <div class="five-days__detail-item-value">
+            {{ WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].wind }} м/с
+          </div>
         </div>
 
         <div class="five-days__detail-item">
           <div class="five-days__detail-item-text">Влажность</div>
-          <div class="five-days__detail-item-value">98%</div>
+          <div class="five-days__detail-item-value">
+            {{ WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].humidity }}%
+          </div>
         </div>
 
         <div class="five-days__detail-item">
           <div class="five-days__detail-item-text">Видимость</div>
-          <div class="five-days__detail-item-value">7 км</div>
+          <div class="five-days__detail-item-value">
+            {{ WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].visibility }} км
+          </div>
         </div>
 
         <div class="five-days__detail-item">
           <div class="five-days__detail-item-text">Давление</div>
-          <div class="five-days__detail-item-value">741 мм</div>
+          <div class="five-days__detail-item-value">
+            {{ WEATHER_FOR_FIVE_DAYS[SELECTED_DAY].pressure }} мм
+          </div>
         </div>
       </div>
     </div>
@@ -34,8 +50,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'FiveDaysDetailsData',
+
+  computed: {
+    ...mapGetters(['WEATHER_FOR_FIVE_DAYS', 'SELECTED_DAY']),
+  },
 };
 </script>
 
@@ -69,6 +91,11 @@ export default {
   font-weight: 700;
 }
 
+.five-days__detail-feels-like {
+  font-size: 20px;
+  line-height: 24px;
+}
+
 .five-days__detail-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -82,7 +109,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 7px;
 }
 

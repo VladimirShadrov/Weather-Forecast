@@ -25,6 +25,8 @@ const store = new Vuex.Store({
     isModalErrorVisible: false,
     cityError: '',
     isDataLoading: false,
+    weatherForFiveDays: [],
+    selectedDay: 0,
   },
 
   getters: {
@@ -67,6 +69,14 @@ const store = new Vuex.Store({
 
     DATA_LOADING(state) {
       return state.isDataLoading;
+    },
+
+    WEATHER_FOR_FIVE_DAYS(state) {
+      return state.weatherForFiveDays;
+    },
+
+    SELECTED_DAY(state) {
+      return state.selectedDay;
     },
   },
 
@@ -148,6 +158,14 @@ const store = new Vuex.Store({
     SHOW_LOADER(state) {
       state.isDataLoading = !state.isDataLoading;
     },
+
+    SET_WEATHER_FOR_FIVE_DAYS(state, data) {
+      state.weatherForFiveDays = data;
+    },
+
+    SET_SELECTED_DAY(state, day) {
+      state.selectedDay = day;
+    },
   },
 
   actions: {
@@ -173,7 +191,7 @@ const store = new Vuex.Store({
         });
     },
 
-    GET_WEATHER_FOR_FIVE_DAYS() {
+    GET_WEATHER_FOR_FIVE_DAYS(context) {
       fetch(
         'https://api.openweathermap.org/data/2.5/forecast?q=Москва&appid=c18945d191bd6987791292cb17a65e5c&lang=ru&units=metric'
       )
@@ -196,6 +214,7 @@ const store = new Vuex.Store({
               )}.${item.dt_txt.slice(0, 4)}г.`,
               temperature: Math.round(item.main.temp),
               weather: item.weather[0].description,
+              icon: `http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`,
               fellsLike: Math.round(item.main.feels_like),
               wind: Math.round(item.wind.speed),
               visibility: Math.round(item.visibility / 1000),
@@ -203,8 +222,9 @@ const store = new Vuex.Store({
               pressure: Math.round(item.main.pressure * 0.736),
             };
           });
-
           console.log(weatherForFiveDays);
+
+          context.commit('SET_WEATHER_FOR_FIVE_DAYS', weatherForFiveDays);
         });
     },
   },

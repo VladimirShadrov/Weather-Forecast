@@ -1,18 +1,27 @@
 <template>
   <div class="five-days__common-container">
     <div class="five-days__list">
-      <FiveDaysListItem />
+      <FiveDaysListItem
+        v-for="(day, index) in WEATHER_FOR_FIVE_DAYS"
+        :key="index"
+        :weatherForDay="day"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import FiveDaysListItem from './fiveDaysListItem.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'FiveDaysCommonData',
   components: {
     FiveDaysListItem,
+  },
+
+  computed: {
+    ...mapGetters(['WEATHER_FOR_FIVE_DAYS']),
   },
 };
 </script>
