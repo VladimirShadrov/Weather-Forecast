@@ -24,8 +24,8 @@ export default {
 <style lang="scss">
 .main-container {
   background: rgba(0, 0, 0, 0.5);
-
   padding: 15px;
+  padding-bottom: 30px;
   border-radius: 15px;
   margin-bottom: 40px;
 }
