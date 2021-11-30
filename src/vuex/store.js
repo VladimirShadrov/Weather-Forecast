@@ -229,7 +229,7 @@ const store = new Vuex.Store({
               )}.${item.dt_txt.slice(0, 4)}г.`,
               temperature: Math.round(item.main.temp),
               weather: item.weather[0].description,
-              icon: `http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`,
+              icon: `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`,
               fellsLike: Math.round(item.main.feels_like),
               wind: Math.round(item.wind.speed),
               visibility: Math.round(item.visibility / 1000),
