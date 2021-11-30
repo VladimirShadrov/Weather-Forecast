@@ -1,5 +1,5 @@
 <template>
-  <div class="five-days__list-item">
+  <div class="five-days__list-item" @click="selectDay">
     <div class="five-days__item-date">{{ weatherForDay.date }}</div>
     <div class="five-days__item-icon">
       <img :src="weatherForDay.icon" alt="weather" title="Weather icon" />
@@ -15,8 +15,22 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+
 export default {
   name: 'FiveDaysListItem',
+
+  methods: {
+    ...mapMutations(['SET_SELECTED_DAY', 'SET_BLOCK_VISIBILITY']),
+    selectDay() {
+      this.SET_BLOCK_VISIBILITY();
+
+      setTimeout(() => {
+        this.SET_SELECTED_DAY(this.weatherForDay.index);
+        this.SET_BLOCK_VISIBILITY();
+      }, 300);
+    },
+  },
 
   props: {
     weatherForDay: {},
@@ -35,6 +49,11 @@ export default {
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
 }
 
 .five-days__item-date {
@@ -88,6 +107,10 @@ export default {
   .five-days__list-item {
     width: 100%;
     margin: 5px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
   }
 }
 </style>

@@ -1,5 +1,8 @@
 <template>
-  <div class="five-days__detail-container">
+  <div
+    class="five-days__detail-container"
+    :class="{ 'block-transparent': IS_BLOCK_VISIBLE }"
+  >
     <div class="five-days__detail-left-bar">
       <div class="five-days__detail-date">
         {{
@@ -92,7 +95,11 @@ export default {
   name: 'FiveDaysDetailsData',
 
   computed: {
-    ...mapGetters(['WEATHER_FOR_FIVE_DAYS', 'SELECTED_DAY']),
+    ...mapGetters([
+      'WEATHER_FOR_FIVE_DAYS',
+      'SELECTED_DAY',
+      'IS_BLOCK_VISIBLE',
+    ]),
   },
 };
 </script>
@@ -102,6 +109,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   padding-top: 20px;
+  transition: 0.3s;
 }
 
 .five-days__detail-left-bar,

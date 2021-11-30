@@ -48,7 +48,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['GET_WEATHER']),
+    ...mapActions(['GET_WEATHER', 'GET_WEATHER_FOR_FIVE_DAYS']),
     ...mapMutations(['SHOW_LOADER']),
     selectCity(city) {
       if (this.selectedCity === '') {
@@ -56,6 +56,7 @@ export default {
       }
 
       this.GET_WEATHER(city);
+      // this.GET_WEATHER_FOR_FIVE_DAYS(city);
       this.SHOW_LOADER();
       this.selectedCity = '';
       this.$refs.cityInput.blur();

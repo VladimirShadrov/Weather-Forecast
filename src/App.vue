@@ -1,7 +1,7 @@
 <template>
   <div id="app" :class="{ 'data-loading': DATA_LOADING }">
     <div class="container">
-      <MainPage v-if="isVisible" />
+      <MainPage />
       <FiveDaysPage />
     </div>
     <ModalError v-if="MODAL_ERROR_DATA.modalExist" />
@@ -16,12 +16,6 @@ import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'App',
-
-  data() {
-    return {
-      isVisible: false,
-    };
-  },
 
   components: {
     MainPage,
@@ -56,6 +50,10 @@ export default {
   font-size: 16px;
   line-height: 20px;
   color: #ffffff;
+}
+
+.block-transparent {
+  opacity: 0;
 }
 
 .container {

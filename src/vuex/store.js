@@ -27,6 +27,7 @@ const store = new Vuex.Store({
     isDataLoading: false,
     weatherForFiveDays: [],
     selectedDay: 0,
+    isBlockVisible: false,
   },
 
   getters: {
@@ -77,6 +78,10 @@ const store = new Vuex.Store({
 
     SELECTED_DAY(state) {
       return state.selectedDay;
+    },
+
+    IS_BLOCK_VISIBLE(state) {
+      return state.isBlockVisible;
     },
   },
 
@@ -166,6 +171,10 @@ const store = new Vuex.Store({
     SET_SELECTED_DAY(state, day) {
       state.selectedDay = day;
     },
+
+    SET_BLOCK_VISIBILITY(state) {
+      state.isBlockVisible = !state.isBlockVisible;
+    },
   },
 
   actions: {
@@ -177,6 +186,12 @@ const store = new Vuex.Store({
           response.ok ? response.json() : Promise.reject(response)
         )
         .then((weatherData) => {
+          const selectedDay = 0;
+
+          context.commit('SET_SELECTED_DAY', selectedDay);
+
+          context.dispatch('GET_WEATHER_FOR_FIVE_DAYS', city);
+
           setTimeout(() => context.commit('SET_WEATHER', weatherData), 300);
 
           if (this.state.isDataLoading) {
@@ -195,7 +210,7 @@ const store = new Vuex.Store({
       fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=c18945d191bd6987791292cb17a65e5c&lang=ru&units=metric`
       )
-        .then((res) => res.json())
+        .then((response) => response.json())
         .then((data) => {
           const weather = [];
 
@@ -206,7 +221,7 @@ const store = new Vuex.Store({
           return weather;
         })
         .then((data) => {
-          const weatherForFiveDays = data.map((item) => {
+          const weatherForFiveDays = data.map((item, index) => {
             return {
               date: `${item.dt_txt.slice(8, 10)}.${item.dt_txt.slice(
                 5,
@@ -220,6 +235,7 @@ const store = new Vuex.Store({
               visibility: Math.round(item.visibility / 1000),
               humidity: item.main.humidity,
               pressure: Math.round(item.main.pressure * 0.736),
+              index: index,
             };
           });
 
