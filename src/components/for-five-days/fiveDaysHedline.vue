@@ -1,26 +1,29 @@
 <template>
   <div class="five-days__headline">
     <div class="five-days__bread-crumbs">
-      <a href="#" class="five-days__crumb">
-        Главная
-
-        <svg
-          width="14"
-          height="10"
-          viewBox="0 0 14 10"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M11.5515 4.39995L8.57574 1.42421L9.42426 0.575684L13.8485 4.99995L9.42426 9.42421L8.57574 8.57568L11.5515 5.59995H0V4.39995H11.5515Z"
-            fill="white"
-          ></path>
-        </svg>
-      </a>
+      <router-link class="router" :to="{ name: 'Main' }">
+        <a href="#" class="five-days__crumb">
+          Главная
+          <svg
+            width="14"
+            height="10"
+            viewBox="0 0 14 10"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11.5515 4.39995L8.57574 1.42421L9.42426 0.575684L13.8485 4.99995L9.42426 9.42421L8.57574 8.57568L11.5515 5.59995H0V4.39995H11.5515Z"
+              fill="white"
+            ></path>
+          </svg>
+        </a>
+      </router-link>
       <span class="five-days__crumb"> Прогноз на 5 дней </span>
     </div>
 
-    <button class="five-days__back-button">На главную</button>
+    <router-link class="router" :to="{ name: 'Main' }">
+      <button class="five-days__back-button">На главную</button>
+    </router-link>
   </div>
 </template>
 

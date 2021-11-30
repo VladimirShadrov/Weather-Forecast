@@ -1,26 +1,21 @@
 <template>
   <div id="app" :class="{ 'data-loading': DATA_LOADING }">
     <div class="container">
-      <MainPage />
-      <FiveDaysPage />
+      <router-view></router-view>
     </div>
     <ModalError v-if="MODAL_ERROR_DATA.modalExist" />
   </div>
 </template>
 
 <script>
-import MainPage from './components/main-page/mainPage.vue';
 import ModalError from './components/modalError.vue';
-import FiveDaysPage from './components/for-five-days/forecastFiveDays.vue';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'App',
 
   components: {
-    MainPage,
     ModalError,
-    FiveDaysPage,
   },
 
   methods: {
@@ -54,6 +49,10 @@ export default {
 
 .block-transparent {
   opacity: 0;
+}
+
+.router {
+  text-decoration: none;
 }
 
 .container {
