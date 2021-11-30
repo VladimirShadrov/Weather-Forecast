@@ -87,7 +87,7 @@ const store = new Vuex.Store({
 
   mutations: {
     SET_WEATHER(state, data) {
-      const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+      const iconUrl = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
       const windDirection = `transform: rotate(${Math.round(
         data.wind.deg
       )}deg)`;
